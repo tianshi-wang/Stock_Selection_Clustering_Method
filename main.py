@@ -72,7 +72,7 @@ for cluster_index in cluster_to_plot:
 
 
 #Find underperformed and outperformed stocks within each cluster based on obs_set
-threshold = 0.05    #Select stocks underperforming or outperforming the rest stocks in a cluster by the threshold.
+threshold = 0.04    #Select stocks underperforming or outperforming the rest stocks in a cluster by the threshold.
 to_buy, to_sell = stock_selection (clusters_stockName_dict, sp_obs, threshold)
 print("Using the data from "+str(sp_obs.columns[0].date())+" to "+str(sp_obs.columns[-1].date())+" to select stocks.")
 print("The stocks underperformed others in same clusters in this period (which are expected to outperform later) are"+
@@ -87,15 +87,15 @@ performance_sp_average = evaluate_performance(list(sp_test.index), sp_test)
 
 print("\nChecking whether the underperformed can perform better than the market from "+str(sp_test.columns[0].date())+" to "
       +str(sp_test.columns[-1].date())+".")
-print("Performance of selected-underperformed stocks: "+str(performance_to_buy))
-print("Performance of selected-outperformed stocks: "+str(performance_to_sell))
+print("Performance of selected-underperformed (to-buy) stocks: "+str(performance_to_buy))
+print("Performance of selected-outperformed (to-sell) stocks: "+str(performance_to_sell))
 print("Performance of avaraged S&P500 stocks: "+str(performance_sp_average))
 
 stock_input = input("Key in a stock name to view its price chart in clustering, observation, and test sets (q to exit): ")
 while stock_input!="q":
     try:
         names.index(stock_input)
-    except ValueError:
+    except:
         if stock_input!="q":
             print("Wrong input. Must be in the form 'AAL'")
     else:
